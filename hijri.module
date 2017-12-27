@@ -11,7 +11,7 @@
 function hijri_help($path, $arg) {
   switch ($path) {
     case 'admin/config/regional/date-time/hijri':
-      return '<p>' . t('Hijri module') . '</p>';
+      return '<p>' . t('Hijri module helps Islamic community to use the Islamic date') . '</p>';
   }
 }
 
@@ -106,7 +106,7 @@ function hijri_month_names() {
     '8' => t('شعبان'),
     '9' => t('رمضان'),
     '10' => t('شوال'),
-    '11' => t('ذو القعده'),
+    '11' => t('ذو العقدة'),
     '12' => t('ذو الحجه'),
   );
 }
@@ -174,9 +174,8 @@ function hijri_format_date($timestamp, $type = 'medium', $format = '', $correcti
       $format = 'm/d/Y - H:i';
       break;
 
-    case 'naseej':
-    //$format = variable_get('date_format_short', 'm/d/Y - H:i');
-      $format = 'm/d/Y ';
+    case 'custom':
+      // No change to format.
       break;
   }
 
@@ -210,7 +209,6 @@ function hijri_preprocess_node(&$variables) {
       case 'long':
       case 'medium':
       case 'short':
-      case 'naseej';
         $format = hijri_format_date($node->getCreatedTime(), $hijri_display, NULL, $correction);
         break;
         default:
@@ -254,7 +252,6 @@ function hijri_preprocess_comment(&$variables) {
       case 'long':
       case 'medium':
       case 'short':
-      case 'naseej';
           $format = hijri_format_date($comment->getCreatedTime(), $hijri_display, NULL, $correction);
          break;
       default:
